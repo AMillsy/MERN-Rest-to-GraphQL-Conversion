@@ -53,11 +53,11 @@ const resolvers = {
     removeBook: async (parent, { bookId }, context) => {
       const updatedUser = await User.findOneAndUpdate(
         { _id: context.user._id },
-        { $pull: { savedBooks: { bookId: params.bookId } } },
+        { $pull: { savedBooks: { bookId: bookId } } },
         { new: true }
       );
 
-      return user;
+      return updatedUser;
     },
   },
 };

@@ -9,16 +9,16 @@ import { GET_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutation";
 
 const SavedBooks = () => {
-  const [userData, setUserData] = useState({});
-
-  // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+  const [oldUser, setUserData] = useState({});
 
   const { loading, data } = useQuery(GET_ME);
+  const userData = data?.me;
+  console.log(data);
+  // use this to determine if `useEffect()` hook needs to run again
+  //const userDataLength = Object.keys(userData).length;
 
   const [removeBookMutation, { error }] = useMutation(REMOVE_BOOK);
 
-  userData = data?.me || {};
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -28,14 +28,10 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await removeBookMutation({ variables: bookId });
+      const { data } = await removeBookMutation({ variables: { bookId } });
 
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
-
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
+      console.log(data);
+      setUserData(data.removeBook);
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
@@ -44,13 +40,13 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (!userDataLength) {
+  if (loading) {
     return <h2>LOADING...</h2>;
   }
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <div fluid="true" className="text-light bg-dark p-5">
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>

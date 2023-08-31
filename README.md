@@ -48,4 +48,4 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 
 This is a book saving website where a user can create an account and then search from books using the Google books API. Once they have found a book, they able to save that book to there account. Once on there account they can see the saved books and delete the books they don't want anymore.
 
-I had to convert the Rest API that was sitting behind this project to work with GraphQL and Apollo.
+I had to convert the Rest API that was sitting behind this project to work with GraphQL and Apollo. G

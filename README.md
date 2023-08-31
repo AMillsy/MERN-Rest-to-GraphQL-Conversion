@@ -48,4 +48,28 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 
 This is a book saving website where a user can create an account and then search from books using the Google books API. Once they have found a book, they able to save that book to there account. Once on there account they can see the saved books and delete the books they don't want anymore.
 
-I had to convert the Rest API that was sitting behind this project to work with GraphQL and Apollo. G
+I had to convert the Rest API that was sitting behind this project to work with GraphQL and Apollo. GraphQL is a lot different from how Rest API works but once set up, its easy to use on the frontend which makes it a lot better and more versatile as you can change the query to what you want on the frontend, without having to set up another route, unlike Rest.
+
+## Usage
+
+This a pre done project, so I will only show the queries and give a description about how it works
+
+### Login and Signup Methods
+
+Once I had the resolver and Typedefs setup to expect login methods then I could use these mutations on the frontend to create and login a user
+
+![Login and Add user mutation](./readme_images/loginAddUserMutation.png)
+
+## Save and delete methods
+
+All you had to do is setup a typedef and resolver that expected to delete and save the books and using Apollo Client you can send your variables to the backend easily.
+
+![Delete book mutation](./readme_images/deletebook.png)
+
+![Save book mutation](./readme_images/savebook.png)
+
+## Get me
+
+This gets the current user logged in via the context that is sent into the resolver. This is used to show all the saved books on the user.
+
+![Get me](./readme_images/getme.png)

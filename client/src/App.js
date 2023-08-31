@@ -18,7 +18,7 @@ function App() {
 
   const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem("id_token");
-
+    console.log("Context is ran");
     return {
       headers: {
         ...headers,
